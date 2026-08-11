@@ -8,6 +8,8 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
+  CARGO_NET_GIT_FETCH_WITH_CLI: "true"
   
 jobs:
   build:
@@ -32,7 +34,7 @@ jobs:
       shell: bash
 
     - name: Build Release
-      run: cargo build --release --target i686-pc-windows-msvc --frozen --verbose
+      run: cargo build --release --target i686-pc-windows-msvc --verbose
       
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
