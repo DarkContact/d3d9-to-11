@@ -1,0 +1,37 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+  
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Rust Toolchain
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: nightly
+        targets: i686-pc-windows-msvc
+
+    - name: Rust Cache
+      uses: swatinem/rust-cache@v2
+
+    - name: Build Release
+      run: cargo build --release --target i686-pc-windows-msvc --verbose
+      
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: d3d9-dll-x86
+        path: target/i686-pc-windows-msvc/release/d3d9.dll
+        if-no-files-found: error
