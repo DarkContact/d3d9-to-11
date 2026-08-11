@@ -26,6 +26,7 @@ regex-syntax = "=0.6.25"
 memchr = "=2.3.3"
 winapi-util = "=0.1.5"
 thread_local = "=1.0.1"
+lazy_static = "=1.4.0"
 
 [dependencies.winapi]
 version = "=0.3.8"
