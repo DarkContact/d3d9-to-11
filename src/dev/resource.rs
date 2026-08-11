@@ -76,14 +76,14 @@ struct Thunk {
 }
 
 impl std::ops::Deref for Thunk {
-    // type Target = Resource; // NOT COMPILE!
+    type Target = Resource; 
     fn deref(&self) -> &Resource {
         &self.rsrc
     }
 }
 
 impl std::ops::DerefMut for Thunk {
-    type Target = Resource;
+    // type Target = Resource; // NOT COMPILE!
     fn deref_mut(&mut self) -> &mut Resource {
         &mut self.rsrc
     }
