@@ -24,6 +24,7 @@ num-complex = "=0.2.4"
 regex = "=1.4.2"
 regex-syntax = "=0.6.25"
 memchr = "=2.3.3"
+winapi-util = "=0.1.5"
 
 [dependencies.winapi]
 version = "=0.3.8"
