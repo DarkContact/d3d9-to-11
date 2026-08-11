@@ -17,6 +17,11 @@ com-impl = { git = "https://github.com/GabrielMajeri/com-impl-rs" }
 bitflags = "1"
 nalgebra = "0.16"
 
+# ХАК ДЛЯ СТАРОГО СБОРЩИКА: Явно фиксируем транзитивные зависимости, 
+# чтобы Cargo не скачивал их современные версии из 2024-2026 годов.
+num-traits = "=0.2.11"
+num-complex = "=0.2.4"
+
 [dependencies.winapi]
 version = "=0.3.8"
 features = [
