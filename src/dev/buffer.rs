@@ -40,16 +40,6 @@ impl VertexBuffer {
 
         unsafe { new_com_interface(vb) }
     }
-
-    // ХАК ДЛЯ ЛИНКОВЩИКА: Выносим метод unlock сюда и запрещаем инлайнинг,
-    // чтобы символ гарантированно экспортировался для link.exe
-    #[inline(never)]
-    pub fn unlock(&self) -> Error {
-        let resource = self.buffer.as_resource();
-        let ctx = self.device_context();
-        ctx.unmap(resource, 0);
-        Error::Success
-    }
 }
 
 impl std::ops::Deref for VertexBuffer {
@@ -103,7 +93,13 @@ impl VertexBuffer {
         Error::Success
     }
 
-    // Метод fn unlock() удален отсюда, так как перенесен выше в обычный impl
+    // Возвращен на место под крыло макроса #[implementation]
+    fn unlock(&self) -> Error {
+        let resource = self.buffer.as_resource();
+        let ctx = self.device_context();
+        ctx.unmap(resource, 0);
+        Error::Success
+    }
 }
 
 /// Buffer holding vertex indices.
@@ -133,15 +129,6 @@ impl IndexBuffer {
         };
 
         unsafe { new_com_interface(vb) }
-    }
-
-    // Для симметрии выносим unlock и для IndexBuffer, предотвращая будущие ошибки линковки
-    #[inline(never)]
-    pub fn unlock(&self) -> Error {
-        let resource = self.buffer.as_resource();
-        let ctx = self.device_context();
-        ctx.unmap(resource, 0);
-        Error::Success
     }
 }
 
@@ -195,5 +182,11 @@ impl IndexBuffer {
         Error::Success
     }
 
-    // Метод fn unlock() также перенесен в обычный impl для IndexBuffer
+    // Возвращен на место под крыло макроса #[implementation]
+    fn unlock(&self) -> Error {
+        let resource = self.buffer.as_resource();
+        let ctx = self.device_context();
+        ctx.unmap(resource, 0);
+        Error::Success
+    }
 }
