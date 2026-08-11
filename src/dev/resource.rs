@@ -76,7 +76,7 @@ struct Thunk {
 }
 
 impl std::ops::Deref for Thunk {
-    type Target = Resource;
+    // type Target = Resource; // NOT COMPILE!
     fn deref(&self) -> &Resource {
         &self.rsrc
     }
