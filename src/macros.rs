@@ -28,11 +28,13 @@ macro_rules! impl_iunknown {
                 }
             }
 
+            #[inline(never)]
             fn add_ref(&mut self) -> u32 {
                 let prev = self.refs.fetch_add(1, Ordering::SeqCst);
                 prev + 1
             }
 
+            #[inline(never)]
             fn release(&mut self) -> u32 {
                 let prev = self.refs.fetch_sub(1, Ordering::SeqCst);
                 if prev == 1 {
