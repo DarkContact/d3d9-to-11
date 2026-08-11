@@ -28,6 +28,7 @@ winapi-util = "=0.1.5"
 thread_local = "=1.0.1"
 lazy_static = "=1.4.0"
 unicode-segmentation = "=1.6.0"
+typenum = "=1.11.2"
 
 [dependencies.winapi]
 version = "=0.3.8"
