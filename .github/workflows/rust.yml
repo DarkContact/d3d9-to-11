@@ -16,23 +16,14 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Install Rust Toolchain
+      
+    # Устанавливаем конкретную старую версию Nightly от 2019 года
+    - name: Install Legacy Rust Toolchain
       uses: dtolnay/rust-toolchain@master
       with:
-        toolchain: nightly
+        toolchain: nightly-2019-09-01
         targets: i686-pc-windows-msvc
 
-    - name: Rust Cache
-      uses: swatinem/rust-cache@v2
-
-    # Вырезаем тесты из Workspace, чтобы Cargo о них забыл
-    - name: Remove tests from workspace config
-      run: |
-        (Get-Content Cargo.toml) -replace '"tests",', '' | Set-Content Cargo.toml
-      shell: powershell
-
-    # Теперь запускаем стандартную сборку релизной библиотеки
     - name: Build Release
       run: cargo build --release --target i686-pc-windows-msvc --verbose
       
