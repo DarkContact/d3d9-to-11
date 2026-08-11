@@ -26,13 +26,9 @@ jobs:
         toolchain: nightly-2019-09-01
         targets: i686-pc-windows-msvc
 
-    # ХАК ДЛЯ УСКОРЕНИЯ: заставляем Git скачивать только самый последний снимок индекса без истории
-    - name: Configure Git for Cargo Speedup
-      run: |
-        git config --global core.autocrlf false
-        git config --global fetch.recurseSubmodules false
-      shell: bash
-
+    - name: Enable Rust Cache
+      uses: Swatinem/rust-cache@v2
+      
     - name: Build Release
       run: cargo build --release --target i686-pc-windows-msvc --verbose
       
