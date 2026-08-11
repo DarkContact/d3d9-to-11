@@ -28,6 +28,3 @@ features = [
     "d3d11",
     "winuser",
 ]
-
-[workspace]
-members = ["tests"]
