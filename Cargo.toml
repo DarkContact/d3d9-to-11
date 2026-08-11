@@ -21,6 +21,8 @@ nalgebra = "0.16"
 # чтобы Cargo не скачивал их современные версии из 2024-2026 годов.
 num-traits = "=0.2.11"
 num-complex = "=0.2.4"
+regex = "=1.4.2"
+regex-syntax = "=0.6.25"
 
 [dependencies.winapi]
 version = "=0.3.8"
